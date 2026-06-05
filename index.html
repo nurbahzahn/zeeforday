@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Muhammad Ligar 💫</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            padding: 15px 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease, visibility 1s ease;
+            padding: 20px;
+        }
+
+        .welcome-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(32px, 8vw, 52px);
+            color: #613f18;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: welcomeFadeIn 1s ease forwards;
+            line-height: 1.3;
+        }
+
+        .welcome-sub {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(14px, 3.5vw, 18px);
+            color: rgba(126, 14, 14, 0.85);
+            margin-top: 15px;
+            text-align: center;
+            opacity: 0;
+            animation: welcomeFadeIn 1s ease 0.5s forwards;
+            max-width: 90%;
+        }
+
+        .welcome-heart {
+            font-size: clamp(50px, 12vw, 90px);
+            margin-bottom: 20px;
+            animation: welcomePulse 1.5s ease infinite;
+        }
+
+        .enter-btn {
+            margin-top: 35px;
+            padding: 14px 35px;
+            background: rgb(53, 41, 41);
+            color: #c4a484;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(14px, 3.5vw, 16px);
+            font-weight: 600;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: welcomeFadeIn 1s ease 1s forwards, btnPulse 2s ease infinite 2s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            white-space: nowrap;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @keyframes welcomeFadeIn {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes welcomePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
+        }
+
+        /* Main Content */
+        .main-content {
+            display: none;
+            width: 100%;
+            max-width: 540px;
+            padding: 15px;
+            opacity: 0;
+            animation: mainFadeIn 1s ease 0.3s forwards;
+        }
+
+        .main-content.visible {
+            display: block;
+        }
+
+        @keyframes mainFadeIn {
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: rgba(75, 54, 54, 0.97);
+            border-radius: 25px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            animation: cardFloatIn 1s ease-out;
+            width: 100%;
+        }
+
+        @keyframes cardFloatIn {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.03), transparent);
+            animation: cardShine 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes cardShine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .heart {
+            font-size: clamp(45px, 10vw, 60px);
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1.2); }
+            75% { transform: scale(1.1); }
+        }
+
+        h1 {
+            color: #764ba2;
+            font-size: clamp(22px, 5.5vw, 28px);
+            margin-bottom: 8px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: clamp(12px, 3vw, 14px);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message-box {
+            background: linear-gradient(135deg, #912749 0%, #9e673e 100%);
+            border-radius: 18px;
+            padding: 20px 18px;
+            margin: 15px 0;
+            text-align: left;
+            position: relative;
+            border-left: 4px solid #c29b60;
+            overflow: visible;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .message-box::after {
+            content: '✨';
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 18px;
+            opacity: 0.3;
+            animation: sparkleRotate 3s linear infinite;
+        }
+
+        @keyframes sparkleRotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .message-text {
+            color: #139;
+            font-size: clamp(13px, 3.2vw, 15px);
+            line-height: 1.9;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            position: relative;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .message-text + .message-text {
+            margin-top: 14px;
+        }
+
+        .message-text:nth-child(1) { animation-delay: 0.3s; }
+        .message-text:nth-child(2) { animation-delay: 1s; }
+        .message-text:nth-child(3) { animation-delay: 1.7s; }
+        .message-text:nth-child(4) { animation-delay: 2.4s; }
+        .message-text:nth-child(5) { animation-delay: 3.1s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-8px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .highlight {
+            color: #d2b48c;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #daa06d, #efdecd);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: underlineGrow 0.5s ease forwards;
+            animation-delay: inherit;
+        }
+
+        @keyframes underlineGrow {
+            to { transform: scaleX(1); }
+        }
+
+        .support-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #daa06d, #efdecd);
+            color: rgb(93, 70, 70);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: clamp(12px, 3vw, 14px);
+            font-weight: 600;
+            margin-top: 18px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            animation: fadeIn 1s 3.5s forwards;
+            opacity: 0;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .support-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .support-badge:hover::before {
+            left: 100%;
+        }
+
+        .support-badge:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(168, 156, 84, 0.4);
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: rgba(255,255,255,0.25);
+            font-size: 20px;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            to {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .signature {
+            margin-top: 20px;
+            color: #999;
+            font-size: clamp(11px, 2.8vw, 13px);
+            font-style: italic;
+            animation: fadeIn 1s 4s forwards;
+            opacity: 0;
+            position: relative;
+            z-index: 1;
+            word-wrap: break-word;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: sparkleAnim 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px #ffd700; }
+        }
+
+        /* Interactive response section */
+        .response-section {
+            margin-top: 20px;
+            display: none;
+            animation: slideDown 0.5s ease-out;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .response-section.active {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .response-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: clamp(11px, 2.8vw, 13px);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+
+        .btn:hover::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .btn:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .encouragement-response {
+            margin-top: 12px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f0f4ff, #e8eeff);
+            border-radius: 15px;
+            color: #1f4b74;
+            font-weight: 600;
+            display: none;
+            animation: popIn 0.5s ease-out;
+            border-left: 3px solid #667eea;
+            text-align: left;
+            line-height: 1.7;
+            font-size: clamp(12px, 3vw, 14px);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .encouragement-response.show {
+            display: block;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(118, 75, 162, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(161, 153, 144, 0.5);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-heart">🤎</div>
+        <div class="welcome-text">Welcome My Fav Person</div>
+        <div class="welcome-sub">Ada sesuatu spesial untukmu di dalam...</div>
+        <button class="enter-btn" onclick="enterMain()">✨ Buka Suratnya ✨</button>
+    </div>
+
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="heartsContainer"></div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="card">
+            <div class="sparkle" style="top: 20px; left: 30px; animation-delay: 0s;"></div>
+            <div class="sparkle" style="top: 55px; right: 40px; animation-delay: 0.7s;"></div>
+            <div class="sparkle" style="bottom: 75px; left: 20px; animation-delay: 1.4s;"></div>
+            <div class="sparkle" style="top: 110px; right: 25px; animation-delay: 2.1s;"></div>
+
+            <div class="heart">🤎</div>
+            <h1>Hai, Sayangggg </h1>
+            <p class="subtitle">Pesan kecil dari aku untukmu ✨</p>
+
+            <div class="message-box">
+                <p class="message-text">Sayang, aku tahu kerja itu <span class="highlight">melelahkan</span>. Capek itu wajar, bukan kelemahan. Jangan pernah merasa bersalah karena tubuhmu butuh istirahat karena kamu manusia, bukan mesin yang bisa terus berjalan tanpa henti.</p>
+
+                <p class="message-text"><span class="highlight">Jaga kesehatanmu</span>, ya? Makan yang teratur, tidur yang cukup, minum air yang banyak.ingat aku ga ngelarang untuk minum manis tapi aku mau kamu kurangin minum. Jaga makan itu penting, bukan sekadar isi perut, tapi juga isi semangatmu untuk esok hari,jangan terlalu sering begadang .</p>
+
+                <p class="message-text">Aku selalu <span class="highlight"></span> nunggu kamu, tapi menunggu kabar bahwa kamu bahagia. Itu saja sudah cukup buatku tenang. Aku ingin melihatmu tersenyum, meski dari kejauhan, meski dari cerita orang lain.</p>
+
+                <p class="message-text">Dan satu hal lagi yang ingin kusampaikan dengan tulus: <span class="highlight">kamu tak perlu merasa sungkan</span> untuk mengeluh, untuk bercerita,aku ada sebagai seseorang yang masih peduli.</p>
+
+                <p class="message-text"><span class="highlight">Semangat terus, sayang.</span> aku tau ego kamu sering tinggi aku harap kamu selalu bisa ungkapin apa yang kamu rasa tanpa perlu takut orang lain tidak menerima itu 🫂</p>
+
+                 <p class="message-text"><span class="highlight">Sayang aku seneng kenal kamu.</span> Maaf untuk hal yang sering bikin capek kamu dengan semua pertanyaanku</p>
+
+                 <p class="message-text"><span class="highlight">Terimakasih bahwa bahagia itu bisa sekecil senyummu di ujung telepon.</span> sekecil nama yang muncul di layar, sekecil "udah makan?" yang ternyata adalah cara paling manusiawi untuk mengatakan aku peduli. </p>
+
+                 <p class="message-text"><span class="highlight">Aku mungkin bukan pemberi terbaik yang pernah kamu temui, tapi semoga kamu selalu ingat baiknya aku bukan kurangnya yang ada pada diriku</span> saat kamu hadir, apa yang aku katakan mungkin hanya kata kecil tapi aku harap kamu bisa bahagia dengan pesan pesan kecil ini 💗</p>
+            </div>
+
+            <button class="support-badge" onclick="showResponse()">
+                💌 note semangat nih pilih sayang 🥰
+            </button>
+
+            <div class="response-section" id="responseSection">
+                <p style="color: #666; font-size: clamp(12px, 3vw, 14px);">Pilih semangat yang kamu butuhkan:</p>
+                <div class="response-buttons">
+                    <button class="btn" onclick="showEncouragement('kerja')">💼 Kerja</button>
+                    <button class="btn" onclick="showEncouragement('hidup')">🌱 Hidup</button>
+                    <button class="btn" onclick="showEncouragement('cinta')">💕 Cinta</button>
+                </div>
+                <div class="encouragement-response" id="encouragementResponse"></div>
+            </div>
+
+            <p class="signature"> ~zee for day~ 💫</p>
+        </div>
+    </div>
+
+    <script>
+        // Welcome Screen Logic
+        function enterMain() {
+            const welcome = document.getElementById('welcomeScreen');
+            const main = document.getElementById('mainContent');
+
+            welcome.classList.add('hidden');
+            main.classList.add('visible');
+
+            // Start floating hearts after entering
+            setTimeout(() => {
+                createHearts();
+            }, 500);
+
+            // Enable body scroll
+            document.body.style.overflowY = 'auto';
+            document.body.style.alignItems = 'flex-start';
+        }
+
+        // Generate floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const hearts = ['💜', '💙', '✨', '💫', '🌟', '💖', '💗'];
+
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                container.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 10000);
+            }, 600);
+        }
+
+        function showResponse() {
+            const section = document.getElementById('responseSection');
+            section.classList.add('active');
+            setTimeout(() => {
+                section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+
+        function showEncouragement(type) {
+            const responses = {
+                kerja: "🔥 Kerjaan bisa menumpuk wajar istirahat kalau butuh, tapi jangan menyerah. Jaga kesehatan dan makan yang teratur, ya? Kamu hebat! 💼✨",
+                hidup: "🌈 Hidup memang nggak mudah, tapi kamu sudah berhasil melewati hari-hari sulit sebelumnya. Aku yakin kamu bisa lagi. Jaga kesehatan, jaga makan, dan inget kamu nggak sendirian. Kuat! 💪",
+                cinta: "💝 Hatimu berharga. Jangan biarkan siapapun membuatmu merasa kurang. Kamu layak dicintai dengan tulus dan dijaga dengan sayang. Tetap percaya pada kebaikan! 💕"
+            };
+
+            const responseDiv = document.getElementById('encouragementResponse');
+            responseDiv.textContent = responses[type];
+            responseDiv.classList.add('show');
+        }
+    </script>
+</body>
+</html>
